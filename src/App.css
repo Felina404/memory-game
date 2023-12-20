@@ -1,0 +1,181 @@
+@font-face {
+  font-family: "heart_breaking_badregular";
+  src: url("./assets/heart_breaking_bad-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --gameOver: #51b03c;
+}
+
+body {
+  height: 100vh;
+  background: url("./assets/background.jpg") no-repeat;
+  background-size: 100vw 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+}
+
+.header {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.header > * {
+  margin: 2%;
+}
+
+.header > * > * {
+  margin-bottom: 4%;
+}
+
+.header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "heart_breaking_badregular", "Courier New", Courier, monospace;
+}
+
+.score {
+  color: red;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.card {
+  width: 180px;
+  height: auto;
+  margin: 2%;
+  border: 5px solid green;
+}
+
+.clicked-card {
+  animation-name: flip;
+  animation-iteration-count: 1;
+  animation-duration: 2s;
+  animation-fill-mode: backwards;
+}
+
+.restart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url("./assets/van.jpg") no-repeat center;
+  background-position: center;
+  background-size: 100% 100%;
+  width: 50%;
+  height: 50%;
+  border-radius: 10%;
+  border: 5px solid blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "heart_breaking_badregular", "Courier New", Courier, monospace;
+}
+.restart > * {
+  margin: 5%;
+}
+
+.restart h3 {
+  font-size: 3em;
+}
+.restart p {
+  color: #de1b1b;
+  font-size: 4em;
+  font-weight: bolder;
+}
+
+.restart button {
+  font-size: 2em;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: transform 1s;
+}
+
+.restart button:hover {
+  transform: scale(1.5);
+}
+
+.restart button:focus {
+  border: none;
+  outline: none;
+}
+@keyframes flip {
+  0% {
+    rotate: y 90deg;
+    content: url("./assets/cards/flipped.webp");
+  }
+
+  100% {
+    content: url("./assets/cards/flipped.webp");
+  }
+}
+
+@media (max-width: 1193px) {
+  /*  .card {
+    width: 150px;
+  } */
+  body {
+    height: 250vh;
+    background-size: 250vh;
+  }
+}
+
+@media (max-width: 650px) {
+  /*  .card {
+    width: 150px;
+  } */
+  body {
+    height: 350vh;
+    background-size: 350vh;
+  }
+}
+
+@media (max-width: 550px) {
+  body {
+    height: 200vh;
+    background-size: 200vh;
+  }
+  .card {
+    width: 100px;
+    height: 150px;
+  }
+
+  .restart {
+    width: 80%;
+    height: 30%;
+  }
+
+  .restart > * {
+    margin: 2%;
+  }
+}
