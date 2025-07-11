@@ -3,7 +3,7 @@ function Header(props) {
     <div className="header">
       <div className="header-center">
         <h1>Memory Cards</h1>
-        <p>Don't click the same image twice</p>
+        <p>Do not click the same image twice</p>
       </div>
       <div className="scoreboard">
         <p className="high-score">

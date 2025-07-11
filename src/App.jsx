@@ -10,20 +10,17 @@ function App() {
   const [highScore, setHighScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [winState, setWinState] = useState(false);
+  const [clickedMap, setClickedMap] = useState({});
+  const [animateAll, setAnimateAll] = useState(false);
 
-  useEffect(() => {
-    let x;
-    const interval = setInterval(() => {
-      x = document.querySelectorAll(".card").forEach((image) => {
-        image.classList.add("clicked-card");
-      }, 2000);
-    });
-
-    return () =>
-      document.querySelectorAll(".card").forEach((image) => {
-        image.classList.remove("clicked-card");
-      });
-  }, [[images.clicked]]);
+  useEffect (() => {
+    images.forEach((el) => {
+      setClickedMap((prevState) => ({
+        ...prevState,
+        [el.id]: false,
+      }));
+    })
+  },[gameOver]);
 
   useEffect(() => {
     let currentIndex = images.length,
@@ -39,16 +36,26 @@ function App() {
     }
   }, [[images.clicked]]);
 
-  const handleClick = (e) => {
-    let x;
-    let idValue = e.target.attributes[3].value;
-    images.forEach((ele, i) => {
-      ele.id == idValue ? (x = i) : null;
-    });
+  const handleClick = (id) => {
+    setClickedMap((prevState) => ({
+      ...prevState,
+      [id]: true,
+    }));
 
-    images[x].clicked
+
+      setAnimateAll(false);       
+      requestAnimationFrame(() =>  
+      setAnimateAll(true)
+       );
+
+    checkGameOver(id);
+  };
+
+  const checkGameOver = (id) => {
+    console.log(clickedMap[id]);
+     clickedMap[id]
       ? (setGameOver(true), setWinState(false))
-      : ((images[x].clicked = true),
+      : (
         setCurrentScore(currentScore + 1),
         highScore < currentScore + 1 ? setHighScore(currentScore + 1) : null,
         currentScore >= images.length - 1
@@ -73,7 +80,7 @@ function App() {
       ></Header>
       <div className="main">
         {!gameOver ? (
-          <Cards images={images} handleClick={handleClick}></Cards>
+          <Cards images={images} clickedMap={clickedMap} handleClick={handleClick} animateAll={animateAll}></Cards>
         ) : null}
         {gameOver === true ? (
           <Restart restart={restart} winState={winState}></Restart>
