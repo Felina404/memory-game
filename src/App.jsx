@@ -12,7 +12,13 @@ function App() {
   const [winState, setWinState] = useState(false);
   const [clickedMap, setClickedMap] = useState({});
   const [animateAll, setAnimateAll] = useState(false);
+  const [imagescp, setImagescp] = useState([]);
 
+  useEffect(() => {
+    setImagescp(images);
+  }, []);
+
+  // initial render and after every game over.
   useEffect (() => {
     images.forEach((el) => {
       setClickedMap((prevState) => ({
@@ -22,19 +28,20 @@ function App() {
     })
   },[gameOver]);
 
-  useEffect(() => {
-    let currentIndex = images.length,
-      randomIndex;
-    while (currentIndex > 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
+  
+// useEffect(() => {
+//   if (!imagescp.length) return;
 
-      [images[currentIndex], images[randomIndex]] = [
-        images[randomIndex],
-        images[currentIndex],
-      ];
-    }
-  }, [[images.clicked]]);
+//   const shuffled = [...imagescp];
+
+//   for (let i = shuffled.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+//   }
+
+//   setImagescp(shuffled);
+// }, [clickedMap]);       
+
 
   const handleClick = (id) => {
     setClickedMap((prevState) => ({
@@ -42,13 +49,26 @@ function App() {
       [id]: true,
     }));
 
-
       setAnimateAll(false);       
       requestAnimationFrame(() =>  
       setAnimateAll(true)
        );
 
     checkGameOver(id);
+    shuffleImages();
+  };
+
+  const shuffleImages = () => {
+      if (!imagescp.length) return;
+
+  const shuffled = [...imagescp];
+
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  setImagescp(shuffled);
   };
 
   const checkGameOver = (id) => {
@@ -80,7 +100,7 @@ function App() {
       ></Header>
       <div className="main">
         {!gameOver ? (
-          <Cards images={images} clickedMap={clickedMap} handleClick={handleClick} animateAll={animateAll}></Cards>
+          <Cards images={imagescp} clickedMap={clickedMap} handleClick={handleClick} animateAll={animateAll}></Cards>
         ) : null}
         {gameOver === true ? (
           <Restart restart={restart} winState={winState}></Restart>

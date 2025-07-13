@@ -1,4 +1,5 @@
 function Cards({ images, clickedMap,  handleClick, animateAll }) {
+  
   return (
     <div className="cards-container">
       {images.map((image) => (
@@ -9,7 +10,7 @@ function Cards({ images, clickedMap,  handleClick, animateAll }) {
           key={image.id}
           // className="card"
           id={image.id}
-          onClick={() => handleClick(image.id)}
+          onClick={() => handleClick(image.id, image.name)}
         ></img>
       ))}
     </div>

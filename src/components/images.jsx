@@ -9,15 +9,15 @@ import saul from "../assets/cards/Saul.webp";
 import waltjr from "../assets/cards/WaltJr.webp";
 
 const picturesObj = [
-  { name: walt, id: 0, src: walt},
-  { name: jesse, id: 1, src: jesse},
-  { name: skyler, id: 2, src: skyler},
-  { name: hank, id: 3, src: hank},
-  { name: marie, id: 4, src: marie},
-  { name: gus, id: 5, src: gus},
-  { name: mike, id: 6, src: mike},
-  { name: saul, id: 7, src: saul},
-  { name: waltjr, id: 8, src: waltjr},
+  { name: 'walt', id: 0, src: walt},
+  { name: 'jesse', id: 1, src: jesse},
+  { name: 'skyler', id: 2, src: skyler},
+  { name: 'hank', id: 3, src: hank},
+  { name: 'marie', id: 4, src: marie},
+  { name: 'gus', id: 5, src: gus},
+  { name: 'mike', id: 6, src: mike},
+  { name: 'saul', id: 7, src: saul},
+  { name: 'waltjr', id: 8, src: waltjr},
 ];
 
 export default picturesObj;
