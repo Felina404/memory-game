@@ -21,14 +21,15 @@ function App() {
   }, []);
 
   // initial render and after every game over.
-  useEffect (() => {
-    imagescp.forEach((el) => {
-      setClickedMap((prevState) => ({
-        ...prevState,
-        [el.id]: false,
-      }));
-    })
-  },[gameOver]);
+  // useEffect (() => {
+  //   if (!gameOver) return;
+  //   imagescp.forEach((el) => {
+  //     setClickedMap((prevState) => ({
+  //       ...prevState,
+  //       [el.id]: false,
+  //     }));
+  //   })
+  // },[gameOver]);
 
 
   const handleClick = (id) => {
@@ -72,8 +73,11 @@ function App() {
   };
 
   const restart = () => {
-    setCurrentScore(0);
-    setGameOver(false);
+     setCurrentScore(0);
+     setClickedMap({})
+     setImagescp(images);  
+     setGameOver(false);
+     shuffleImages();
   };
 
   return (
