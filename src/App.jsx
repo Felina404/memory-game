@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Cards from "./components/Cards";
@@ -14,8 +14,10 @@ function App() {
   const [animateAll, setAnimateAll] = useState(false);
   const [imagescp, setImagescp] = useState([]);
 
-  useEffect(() => {
-    setImagescp(images);
+  //no flashing with first render
+   useLayoutEffect(() => {
+    setImagescp(images);      
+    setAnimateAll(true);        
   }, []);
 
   // initial render and after every game over.
@@ -27,20 +29,6 @@ function App() {
       }));
     })
   },[gameOver]);
-
-  
-// useEffect(() => {
-//   if (!imagescp.length) return;
-
-//   const shuffled = [...imagescp];
-
-//   for (let i = shuffled.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-//   }
-
-//   setImagescp(shuffled);
-// }, [clickedMap]);       
 
 
   const handleClick = (id) => {
@@ -61,14 +49,14 @@ function App() {
   const shuffleImages = () => {
       if (!imagescp.length) return;
 
-  const shuffled = [...imagescp];
+      const shuffled = [...imagescp];
 
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
 
-  setImagescp(shuffled);
+      setImagescp(shuffled);
   };
 
   const checkGameOver = (id) => {
