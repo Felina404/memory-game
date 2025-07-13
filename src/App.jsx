@@ -22,7 +22,7 @@ function App() {
 
   // initial render and after every game over.
   useEffect (() => {
-    images.forEach((el) => {
+    imagescp.forEach((el) => {
       setClickedMap((prevState) => ({
         ...prevState,
         [el.id]: false,
@@ -41,9 +41,9 @@ function App() {
       requestAnimationFrame(() =>  
       setAnimateAll(true)
        );
-
-    checkGameOver(id);
     shuffleImages();
+    checkGameOver(id);
+    
   };
 
   const shuffleImages = () => {
@@ -72,9 +72,6 @@ function App() {
   };
 
   const restart = () => {
-    images.forEach((el) => {
-      el.clicked = false;
-    });
     setCurrentScore(0);
     setGameOver(false);
   };

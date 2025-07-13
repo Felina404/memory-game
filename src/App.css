@@ -87,7 +87,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: url("./assets/van.jpg") no-repeat center;
+  background: url("./assets/van.webp") no-repeat center;
   background-position: center;
   background-size: 100% 100%;
   width: 50%;
