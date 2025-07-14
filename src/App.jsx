@@ -12,12 +12,12 @@ function App() {
   const [winState, setWinState] = useState(false);
   const [clickedMap, setClickedMap] = useState({});
   const [animateAll, setAnimateAll] = useState(false);
-  const [imagescp, setImagescp] = useState([]);
+  const [imagescp, setImagescp] = useState(() => images); // initial during the first render, no need to be in useLayouteffect
   const [clickDisabled, setClickDisabled] = useState(false);
 
   //no flashing with first render
    useLayoutEffect(() => {
-    setImagescp(images);      
+    // setImagescp(images);      
     setAnimateAll(true);        
   }, []);
 
