@@ -1,4 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Cards from "./components/Cards";
@@ -13,6 +13,7 @@ function App() {
   const [clickedMap, setClickedMap] = useState({});
   const [animateAll, setAnimateAll] = useState(false);
   const [imagescp, setImagescp] = useState([]);
+  const [clickDisabled, setClickDisabled] = useState(false);
 
   //no flashing with first render
    useLayoutEffect(() => {
@@ -20,19 +21,11 @@ function App() {
     setAnimateAll(true);        
   }, []);
 
-  // initial render and after every game over.
-  // useEffect (() => {
-  //   if (!gameOver) return;
-  //   imagescp.forEach((el) => {
-  //     setClickedMap((prevState) => ({
-  //       ...prevState,
-  //       [el.id]: false,
-  //     }));
-  //   })
-  // },[gameOver]);
-
 
   const handleClick = (id) => {
+    if (clickDisabled) return;
+
+    setClickDisabled(true);
     setClickedMap((prevState) => ({
       ...prevState,
       [id]: true,
@@ -89,7 +82,7 @@ function App() {
       ></Header>
       <div className="main">
         {!gameOver ? (
-          <Cards images={imagescp} clickedMap={clickedMap} handleClick={handleClick} animateAll={animateAll}></Cards>
+          <Cards images={imagescp} clickedMap={clickedMap} handleClick={handleClick} animateAll={animateAll} onAnimationEnd={ () => setClickDisabled(false)}></Cards>
         ) : null}
         {gameOver === true ? (
           <Restart restart={restart} winState={winState}></Restart>
