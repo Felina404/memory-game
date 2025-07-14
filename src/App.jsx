@@ -57,7 +57,7 @@ function App() {
      clickedMap[id]
       ? (setGameOver(true), setWinState(false))
       : (
-        setCurrentScore(currentScore + 1),
+        setCurrentScore( c => c + 1),
         highScore < currentScore + 1 ? setHighScore(currentScore + 1) : null,
         currentScore >= images.length - 1
           ? (setGameOver(true), setWinState(true))

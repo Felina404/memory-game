@@ -12,7 +12,7 @@ function Cards({ images, handleClick, animateAll, onAnimationEnd }) {
           key={image.id}
           // className="card"
           id={image.id}
-          onClick={() => handleClick(image.id, image.name)}
+          onClick={() => handleClick(image.id)}
           onAnimationEnd={onAnimationEnd}
         ></img>
       ))}
