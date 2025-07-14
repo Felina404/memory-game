@@ -54,7 +54,6 @@ function App() {
   };
 
   const checkGameOver = (id) => {
-    console.log(clickedMap[id]);
      clickedMap[id]
       ? (setGameOver(true), setWinState(false))
       : (
@@ -78,7 +77,6 @@ function App() {
       <Header
         current={currentScore}
         high={highScore}
-        gameOver={gameOver}
       ></Header>
       <div className="main">
         {!gameOver ? (

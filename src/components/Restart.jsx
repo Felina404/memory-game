@@ -1,3 +1,5 @@
+import propTypes from 'prop-types';
+
 function Restart({ restart, winState }) {
   return (
     <div className="restart">
@@ -6,6 +8,11 @@ function Restart({ restart, winState }) {
       <button onClick={restart}>Restart</button>
     </div>
   );
+}
+
+Restart.propTypes = {
+  restart: propTypes.func.isRequired,
+  winState: propTypes.bool.isRequired,
 }
 
 export default Restart;

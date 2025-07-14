@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function Header(props) {
   return (
     <div className="header">
@@ -17,4 +19,8 @@ function Header(props) {
   );
 }
 
+Header.propTypes = {
+  current: PropTypes.number.isRequired,
+  high: PropTypes.number.isRequired,
+}
 export default Header;

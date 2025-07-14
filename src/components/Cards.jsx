@@ -1,4 +1,6 @@
-function Cards({ images, clickedMap,  handleClick, animateAll, onAnimationEnd }) {
+import PropTypes from 'prop-types';
+
+function Cards({ images, handleClick, animateAll, onAnimationEnd }) {
   
   return (
     <div className="cards-container">
@@ -16,6 +18,19 @@ function Cards({ images, clickedMap,  handleClick, animateAll, onAnimationEnd })
       ))}
     </div>
   );
+}
+
+Cards.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      src: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  handleClick: PropTypes.func.isRequired,
+  animateAll: PropTypes.bool.isRequired,
+  onAnimationEnd: PropTypes.func.isRequired,
 }
 
 export default Cards;
