@@ -1,9 +1,13 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Cards from "./components/Cards";
 import images from "./components/images";
 import Restart from "./components/Restart";
+import Welcome from "./components/Welcome";
+import SoundBtn from "./components/SoundBtn";
+
+// import intro from "./assets/sounds/intro.mp3";
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
@@ -14,6 +18,8 @@ function App() {
   const [animateAll, setAnimateAll] = useState(false);
   const [imagescp, setImagescp] = useState(() => images); // initial during the first render, no need to be in useLayouteffect
   const [clickDisabled, setClickDisabled] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [level, setLevel] = useState("");
 
   //no flashing with first render
    useLayoutEffect(() => {
@@ -21,6 +27,33 @@ function App() {
     setAnimateAll(true);        
   }, []);
 
+  // useEffect(() => {
+  //   const audio = new Audio(intro);
+  //   audio.play().catch((err) => {
+  //     console.log('Playback error:', err);
+  //   });
+
+  // }, [gameStarted]);
+  useEffect(() => {
+    const EASY_COUNT = 8;
+    const MEDIUM_COUNT = 10;
+    const HARD_COUNT = images.length;
+
+    if (!gameStarted || !level) return;
+    switch (level) {
+      case "easy":
+        setImagescp(images.slice(0, EASY_COUNT));
+        break;
+      case "medium":
+        setImagescp(images.slice(0, MEDIUM_COUNT));
+        break;
+      case "hard":
+        setImagescp(images.slice(0, HARD_COUNT));
+        break;
+      default:
+        setImagescp(images);
+    }
+  },[gameStarted, level])
 
   const handleClick = (id) => {
     if (clickDisabled) return;
@@ -73,6 +106,7 @@ function App() {
   };
 
   return (
+     gameStarted ? 
     <div className="container">
       <Header
         current={currentScore}
@@ -85,8 +119,10 @@ function App() {
         {gameOver === true ? (
           <Restart restart={restart} winState={winState}></Restart>
         ) : null}
+        <p className="percentage">{currentScore}/{imagescp.length}</p>
       </div>
     </div>
+    : <Welcome clickPlay={() => setGameStarted(true)} level={level} setLevel={setLevel} />
   );
 }
 
