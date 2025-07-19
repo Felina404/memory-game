@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useEffect } from "react";
+import { useState, useLayoutEffect, useEffect, useRef} from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Cards from "./components/Cards";
@@ -6,8 +6,8 @@ import images from "./components/images";
 import Restart from "./components/Restart";
 import Welcome from "./components/Welcome";
 import SoundBtn from "./components/SoundBtn";
-
-// import intro from "./assets/sounds/intro.mp3";
+import { useSound } from "./SoundContext.jsx";
+import flipcard from "./assets/sounds/flipcard.mp3";
 
 function App() {
   const [currentScore, setCurrentScore] = useState(0);
@@ -21,19 +21,16 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState("");
 
+  const { soundEnabled } = useSound();
+  const audioRef = useRef(new Audio(flipcard));
+
   //no flashing with first render
    useLayoutEffect(() => {
     // setImagescp(images);      
     setAnimateAll(true);        
   }, []);
+  
 
-  // useEffect(() => {
-  //   const audio = new Audio(intro);
-  //   audio.play().catch((err) => {
-  //     console.log('Playback error:', err);
-  //   });
-
-  // }, [gameStarted]);
   useEffect(() => {
     const EASY_COUNT = 8;
     const MEDIUM_COUNT = 10;
@@ -68,9 +65,10 @@ function App() {
       requestAnimationFrame(() =>  
       setAnimateAll(true)
        );
-    shuffleImages();
-    checkGameOver(id);
     
+    
+    shuffleImages();
+    checkGameOver(id);  
   };
 
   const shuffleImages = () => {
@@ -86,10 +84,19 @@ function App() {
       setImagescp(shuffled);
   };
 
+  const playSound = () => {
+    if (soundEnabled && audioRef.current) {
+      audioRef.current.currentTime = 0;
+      if (!gameOver) 
+      audioRef.current.play().catch(err => console.log("Playback failed:", err));
+    }
+  };
+
   const checkGameOver = (id) => {
      clickedMap[id]
       ? (setGameOver(true), setWinState(false))
       : (
+        playSound(),
         setCurrentScore( c => c + 1),
         highScore < currentScore + 1 ? setHighScore(currentScore + 1) : null,
         currentScore >= images.length - 1

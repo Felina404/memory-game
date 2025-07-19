@@ -84,6 +84,10 @@ body {
   pointer-events: none;
 }
 
+.level-buttons button:hover {
+  border: 2px solid black;
+}
+
 .loading-container {
   margin: 4px;
   text-align: center;;
@@ -126,6 +130,10 @@ body {
   /* transition: background-color 0.3s, transform 0.3s; */
 }
 
+.skip-btn:hover {
+  border: 2px solid white;
+}
+
 .container {
    /* height: 100vh; */
    
@@ -158,14 +166,20 @@ body {
 
 .scoreboard {
    font-size: clamp(2.5rem, 2.5vw + 1.5rem, 3rem);
+   text-align: center;
 }
 
 .scoreboard p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   text-align: center;
   font-family: "heart_breaking_badregular", "Courier New", Courier, monospace;
 }
 
  .scoreboard .score {
+  font-size: 70%;
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
 }
@@ -199,7 +213,12 @@ body {
   aspect-ratio: 3/4;
   object-fit: cover;
   border-radius: 8px;
+  transition: transform 0.3s ease;
 }
+
+.card:hover {
+   transform: translateX(-10px);
+} 
 
 .clicked-card {
  
