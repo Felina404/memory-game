@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import  { useState, useEffect, useRef } from "react";
 import intro from "../assets/sounds/intro.mp3";
 import PropTypes from 'prop-types';
 import SoundBtn from "./SoundBtn.jsx";

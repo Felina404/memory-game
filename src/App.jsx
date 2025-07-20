@@ -5,7 +5,6 @@ import Cards from "./components/Cards";
 import images from "./components/images";
 import Restart from "./components/Restart";
 import Welcome from "./components/Welcome";
-import SoundBtn from "./components/SoundBtn";
 import { useSound } from "./SoundContext.jsx";
 import flipcard from "./assets/sounds/flipcard.mp3";
 
@@ -99,7 +98,7 @@ function App() {
         playSound(),
         setCurrentScore( c => c + 1),
         highScore < currentScore + 1 ? setHighScore(currentScore + 1) : null,
-        currentScore >= images.length - 1
+        currentScore >= imagescp.length - 1
           ? (setGameOver(true), setWinState(true))
           : null);
   };
@@ -112,6 +111,16 @@ function App() {
      shuffleImages();
   };
 
+  const reset = () => {
+    setGameStarted(false);
+    setLevel("");
+    setGameOver(false);
+    setWinState(false);
+    setCurrentScore(0);
+    setHighScore(0);
+    setClickedMap({})
+  }
+
   return (
      gameStarted ? 
     <div className="container">
@@ -121,12 +130,15 @@ function App() {
       ></Header>
       <div className="main">
         {!gameOver ? (
+          <>
           <Cards images={imagescp} clickedMap={clickedMap} handleClick={handleClick} animateAll={animateAll} onAnimationEnd={ () => setClickDisabled(false)}></Cards>
+          <p className="percentage">{currentScore}/{imagescp.length}</p>
+        </>
         ) : null}
-        {gameOver === true ? (
-          <Restart restart={restart} winState={winState}></Restart>
+        {gameOver === true ?(
+          <Restart restart={restart} winState={winState} reset={reset}></Restart>
         ) : null}
-        <p className="percentage">{currentScore}/{imagescp.length}</p>
+        
       </div>
     </div>
     : <Welcome clickPlay={() => setGameStarted(true)} level={level} setLevel={setLevel} />

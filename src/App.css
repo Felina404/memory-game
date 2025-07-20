@@ -221,7 +221,6 @@ body {
 } 
 
 .clicked-card {
- 
   animation-name: flip;
   animation-iteration-count: 1;
   animation-duration: 2s;
@@ -229,37 +228,42 @@ body {
 }
 
 .restart {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: url("./assets/van.webp") no-repeat center;
-  background-position: center;
-  background-size: 100% 100%;
-  width: 50%;
-  height: 50%;
-  border-radius: 10%;
-  border: 5px solid blue;
+  /* width: 80vw; */
+  color: white;
+  text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: "heart_breaking_badregular", "Courier New", Courier, monospace;
 }
+
+.restart.win {
+  /* background: url("./assets/winImage.webp") no-repeat center; */
+  /* background-position: center;
+  background-size: 100% 100%; */
+}
+
+.restart.lost {
+  /* background: url("./assets/lostImage.webp") no-repeat center;
+  background-position: center;
+  background-size: 100% 100%; */
+}
+
 .restart > * {
   margin: 5%;
 }
 
 .restart h3 {
-  font-size: 3em;
+   font-size: clamp(3rem, 4vw + 2rem, 5rem);
 }
 .restart p {
-  color: #de1b1b;
-  font-size: 4em;
+  font-size: clamp(3rem, 3vw + 2rem, 4rem);
   font-weight: bolder;
 }
 
 .restart button {
+  color: white;
   font-size: 2em;
   background: transparent;
   border: none;
@@ -274,6 +278,13 @@ body {
 .restart button:focus {
   border: none;
   outline: none;
+}
+
+.restart-btns{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 @keyframes flip {
   0% {
