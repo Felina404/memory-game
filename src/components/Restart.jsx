@@ -35,8 +35,7 @@ function Restart({ restart, winState, reset}) {
       <div className='restart-btns'>
         <button onClick={restart}>Restart</button>
         <button onClick={reset}>Quit</button>
-      </div>
-      
+      </div>    
       </div>
   );
 }

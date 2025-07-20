@@ -43,14 +43,13 @@ body {
   position: fixed;
   bottom: 0px;
   right: 0px;
-  z-index: 9999; /* ensure it stays above everything else */
+  z-index: 9999; 
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
   font-size: 2rem;
   color: white;
-  z-index : 1000;
 }
 
 .welcome {
@@ -121,18 +120,17 @@ body {
 }
 
 .skip-btn {
-  font-size: clamp(6rem, 4vw, 5rem); /* responsive text */
+  font-size: clamp(6rem, 4vw, 5rem); 
   padding: 6px 12px;
   color: white;
   background: none;
-  /* border: 1px solid white; */
   border-radius: 6px;
   cursor: pointer;
-  /* transition: background-color 0.3s, transform 0.3s; */
+  border: none;
 }
 
 .skip-btn:hover {
-  border: 2px solid white;
+  /* border: 2px solid white; */
 }
 
 .container {
@@ -186,6 +184,7 @@ body {
 }
 
 .main {
+  overflow: hidden;
   font-family:  'Courier New', Courier, monospace;
   color: white;
   font-weight: bold;
@@ -230,6 +229,11 @@ body {
 
 .restart {
   /* width: 80vw; */
+  border: 2px solid red;
+   top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   color: white;
   text-align: center;
   display: flex;
@@ -252,7 +256,7 @@ body {
 }
 
 .restart > * {
-  margin: 5%;
+  /* margin: 5%; */
 }
 
 .restart h3 {
@@ -286,6 +290,7 @@ body {
   gap: 10px;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 @keyframes flip {
   0% {
